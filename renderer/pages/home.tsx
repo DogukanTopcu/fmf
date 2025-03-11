@@ -1,11 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Navbar from "../components/Navbar";
-import { Plus } from "lucide-react";
+import { Plus, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { IPatient } from '../types/patient';
 import axios from 'axios';
 import GeneAnalysisChart from '../components/GeneAnalysisChart';
+import GeneMutationTypeChart from '../components/GeneMutationTypeChart';
 
 const Home: NextPage = () => {
   const [patients, setPatients] = useState<IPatient[]>([]);
@@ -96,8 +97,22 @@ const Home: NextPage = () => {
             </div>
           </div>
 
+          {/* Toplam Hasta Sayısı */}
+          <div className="bg-white p-6 rounded-lg shadow mb-6 flex items-center">
+            <div className="bg-blue-500 p-3 rounded-full mr-4">
+              <Users size={24} className="text-white" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-gray-800">Toplam Hasta Sayısı</h2>
+              <p className="text-3xl font-bold text-blue-600">{patients.length}</p>
+            </div>
+          </div>
+
           {/* Gen Analizi Grafiği */}
           <GeneAnalysisChart patients={patients} />
+          
+          {/* Gen Mutasyon Tipi Grafiği */}
+          <GeneMutationTypeChart patients={patients} />
           
           {/* Hasta Tablosu */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
